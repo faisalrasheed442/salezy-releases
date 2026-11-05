@@ -490,6 +490,8 @@ Fill in what you need; only the **Name** and **Sale price** are required. The re
 - In a clothing shop: type the sizes and colours (comma separated) to create one product for each combination.
 - An **Offer price** with an end date, **Ask for serial / IMEI number on every sale** for phones and electronics, and
   **Active** (an inactive product does not appear when billing).
+- With tax invoices turned on (see [section 39](#39-shop-details-and-billing)): the **HSN / SAC** code (India) or
+  **HS code**, printed on the tax invoice. Typing a code in the Products search finds every product filed under it.
 
 1. Click **Save product**.
 
@@ -534,7 +536,8 @@ updated, and new ones are added.
 4. The **Ledger** shows every bill and payment, with the date and amounts.
 
 **New customer** (Ctrl+N) adds a customer, and **Edit** (F4) changes their name, phone, address and whether they get
-wholesale prices.
+wholesale prices. With tax invoices turned on, a customer can also have a **tax number** (GSTIN, NTN or STRN) and a
+**state code**; both print on their invoices, and in India a customer from another state is charged IGST.
 
 ## 32. Receive a payment from a customer
 
@@ -611,6 +614,74 @@ At the top are the sales, bills, profit (sale minus cost), returns, payments by 
 are: Sales by day, Top items, Low stock, Expiring ≤ 90 days, Dues, Payables (what you owe suppliers), Returns,
 Expenses, Cash book and Day closes. **Ctrl+Tab** moves to the next tab.
 
+### Accountant export
+
+**Accountant export** (Ctrl+Shift+E) gives your accountant the books for a period without anyone retyping a bill.
+
+1. Choose the dates (**From** and **To**), or click **This month** or **Last month**.
+2. Choose the **Format**:
+   - **Tally XML** makes one file that Tally imports: sales, credit notes for returns, purchases, debit notes for goods
+     sent back, receipts of dues, and payments to suppliers and for expenses. The ledgers it needs (Cash, Bank, Sales,
+     Purchases, Output CGST, Output SGST, Output IGST, each customer and supplier) are in the file too, under Tally's
+     usual groups.
+   - **CSV files** makes a folder of spreadsheet files: a summary, every bill, every item sold with its HSN code, the
+     tax by rate (sales, credit notes and the net), and every other voucher.
+3. Click **Export…** and choose where to save it.
+
+The window shows how many bills and how much in sales, returns, purchases and expenses the period holds before you
+save. The sales total is the same as the Reports screen's for those dates. A cancelled bill goes in as cancelled, so the
+bill numbers have no hole, and a return goes in as a credit note, never as a negative sale. Your tax numbers and your
+customers' are in the file. Exporting the same dates again gives exactly the same file.
+
+In Tally, use **Import > Transactions** (Tally ERP 9: **Import of Data > Vouchers**) and choose the file. If Tally
+reports a ledger that does not exist, import the same file once with **Import > Masters** first.
+
+### Analytics: is the shop growing?
+
+**Analytics** (Ctrl+0, or the **Analytics** button on Reports) shows how this month and this year compare with
+before, so you no longer need to copy your sales into Excel to draw a chart. Only an admin can open it.
+
+![Analytics: this month and this year against before, and the months beside last year](images/analytics.png)
+
+1. **Sales** or **Profit** (Ctrl+M) chooses what the cards, the chart and the rankings show. Profit is the sale less
+   what the goods cost on the day you sold them, less the margin a return gives back. If your financial year does not
+   start in January, **Calendar year** or **Financial year** (Ctrl+Y) chooses which year the chart and the 5-year view
+   use.
+2. The four cards: this month against last month, this month against the same month last year, this financial year
+   against last (or the last 12 months, when your year starts in January), and this year against last year. Each shows
+   the amount, the change in money and in per cent, green when up and red when down. Under them: this month's bills,
+   average bill, items sold and returns, each against last month.
+3. **By month** draws the months of this year beside the same months last year, with the change under each month.
+   Last year is light indigo and this year a stronger indigo; the month you are looking at is drawn in full indigo.
+   Click a month or use the **←** and **→** keys to pick another, and
+   the line under the chart gives its figures. The table below has every month with its bills, average bill, items
+   sold and returns. **5 years** does the same for whole years.
+4. **Export** (Ctrl+E) saves an Excel workbook for your accountant: a summary, the months, the five years, products,
+   categories, customers, cashiers and the stock that is not moving, with real numbers Excel can add up. Choose CSV in
+   the save window to save just the tab you are on. **Save PDF** (Ctrl+P) makes a printable summary with both charts and
+   the top sellers.
+
+A month or year that is still running is compared like for like: on 5 November, this month means 1 to 5 November and
+last month means 1 to 5 October, not the whole of October. The numbers are the same as the Reports screen's: a
+cancelled or held bill never counts, and a return counts on the day the goods came back.
+
+![Analytics rankings: the products growing fastest this year](images/analytics-rankings.png)
+
+The **Products**, **Categories**, **Customers** and **Cashiers** tabs rank them for a period:
+
+1. Pick the period (Ctrl+J): **This month**, **Last month**, **This year**, **Last year** or **Last 12 months**. Each
+   is compared with the period before it, like for like.
+2. Pick the list (Ctrl+L):
+   - **Top sellers**: the most sales (or profit) in the period, with each one's share of the total.
+   - **Growing** and **Falling**: the biggest rise and the biggest drop against the period before. A customer who
+     stopped buying shows at the top of **Falling**.
+   - **Slow movers** (products): in stock and selling, but so slowly that the stock will last longest. **Days of
+     stock** is how long what you hold lasts at this period's pace.
+   - **Dead stock** (products): in stock and not one sold in the period, the most money tied up first, with the day
+     each last sold.
+
+Push the growing ones, find out why the falling ones fell, and stop buying the dead stock.
+
 ## 38. Close the day
 
 At the end of the day, count the cash in the drawer and press **Day close** on the Reports screen.
@@ -641,6 +712,40 @@ The day close prints as a Z report and is kept in **Day closes** on the Reports 
 - **Billing:** the shop type, a prefix for bill numbers, the currency and its symbol, and these switches: show batch and
   expiry fields in any shop, add tax to bills (using each product's tax %), allow billing when stock is zero, print a
   receipt after every sale, and show the quick items under the bill.
+- **Financial year starts:** the month your financial year begins. **Auto** uses April in India, July in Pakistan and
+  January everywhere else. Analytics compares financial years from this month, and a bill series per financial year
+  starts again on it.
+
+### Tax invoices
+
+Press **Ctrl+T** on the Settings screen to jump to the **Tax invoice** card. It is off until you turn it on, and bills
+made before you turn it on keep printing exactly as they did.
+
+1. Tick **Print bills as tax invoices**, and make sure **Enable tax on bills** in the Billing card is ticked too.
+2. **Tax rules:** **Follow the currency** picks India with rupees ₹ and Pakistan with rupees Rs. Choose another if your
+   shop needs it.
+3. **Registration:** a registered shop prints a **Tax Invoice** (a **Sales Tax Invoice** in Pakistan). A composition
+   dealer in India prints a **Bill of Supply** with the line "Composition taxable person, not eligible to collect tax
+   on supplies", and charges no tax. A shop that is not registered prints a bill of supply without tax.
+4. Type the **Shop tax number** (GSTIN, STRN or TRN), the **NTN** in Pakistan, and the **Legal name** if it is not the
+   shop name. In India the **State code** is read from the first two digits of the GSTIN; type it only if it differs.
+5. **Bill numbers:** keep **A new series every day**, or choose **One series per financial year** (April to March in
+   India, July to June in Pakistan) for numbers like 2526-00001 that never restart inside the year. Bills put on hold
+   get their own HOLD- numbers, so holding and discarding a bill leaves no gap.
+6. **PDF invoice page:** A5 (as before) or A4.
+7. **Sale prices already include tax (MRP):** tick this when your prices are tax-inclusive. Salezy then takes the tax
+   out of the price instead of adding it on top, and the receipt says **Tax included**.
+
+What a tax invoice shows, on the receipt (58 or 80 mm, in any language) and on the PDF:
+
+- The title, your legal name and tax numbers, and the customer's tax number when they have one.
+- Each item's HSN code, but only when at least one item on the bill has a code.
+- In India, CGST and SGST as separate lines, each half of the rate; IGST instead when the customer's state differs from
+  yours, with the **Place of supply**.
+- A **Tax summary** with the taxable value and the tax for each rate (5%, 12%, 18% and so on).
+
+The tax shown on a bill is stored with the bill, so a reprint months later shows the same numbers even if a product's
+tax rate or code has changed since.
 
 ## 40. Users and PINs
 
@@ -793,11 +898,23 @@ take your records with it. The section shows when the last backup was taken, and
 | Ctrl+Shift+S | Phone as a barcode scanner |
 | 3* then scan | Add three at once |
 
+**On other screens**
+
+| Key | Does |
+|---|---|
+| Ctrl+T | Settings: jump to the tax invoice card |
+| Ctrl+Shift+E | Reports: accountant export (Tally XML or CSV) |
+| Ctrl+M / Ctrl+Y | Analytics: sales or profit / calendar or financial year |
+| Ctrl+J / Ctrl+L | Analytics: the next period / the next list in the rankings |
+| ← / → | Analytics: pick a month on the chart |
+| Ctrl+E / Ctrl+P | Analytics: export to Excel or CSV / save a PDF summary |
+
 **Anywhere**
 
 | Key | Does |
 |---|---|
 | Ctrl+1 … Ctrl+9 | New bill, Bills, Quotes, Products, Customers, Purchases, Reports, Settings, Expenses |
+| Ctrl+0 | Analytics |
 | Ctrl+D | Light or dark |
 | Ctrl+Shift+L | Switch user |
 | Ctrl+Shift+D | Customer display |
@@ -857,6 +974,18 @@ want to keep.
 | **Variant** | One size and colour of a clothing style. |
 | **ESC/POS** | The language most receipt printers understand. |
 | **Admin / Cashier** | The two kinds of user: an admin can do everything, a cashier can bill. |
+| **Tax invoice** | A bill that shows the shop's tax number and the tax on each rate, as the law asks of a registered shop. |
+| **Bill of supply** | What a composition or unregistered shop in India gives instead of a tax invoice; it shows no tax. |
+| **GSTIN / STRN / NTN** | Tax registration numbers: GST in India, sales tax and income tax in Pakistan. |
+| **HSN / SAC** | The code for a kind of goods or service, printed on an Indian tax invoice. |
+| **CGST / SGST / IGST** | India's GST split: central and state halves within a state, or one integrated tax between states. |
+| **Taxable value** | The amount the tax is worked out on, after discounts and before tax. |
+| **Tally** | The accounting software most accountants in India and Pakistan use; Salezy exports to it. |
+| **Voucher** | One entry in the accounts: a sale, a purchase, a receipt or a payment. |
+| **Credit note / debit note** | A return from a customer / a return to a supplier, as the accounts record it. |
+| **Financial year (FY)** | The twelve months your accounts run over, such as April to March in India or July to June in Pakistan. |
+| **Like for like** | Comparing the same stretch of days: 1 to 5 November against 1 to 5 October. |
+| **Dead stock** | Goods on the shelf that did not sell at all in the period you chose. |
 
 ## 51. Get help
 
