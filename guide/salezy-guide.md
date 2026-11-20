@@ -132,7 +132,9 @@ The first time Salezy opens, it asks for a few details about your shop.
 2. **Currency:** pick yours from the list. It sets the symbol and how many decimals are shown.
 3. **Shop name (printed on receipts):** required. Add the phone and address next to it if you want them on receipts.
 4. **What kind of shop?** This turns on the right features: a medical store gets batches, expiry and prescriptions; a
-   clothing shop gets sizes, colours and selling by the metre.
+   clothing shop gets sizes, colours and selling by the metre; a sanitary and hardware shop gets pipes and fittings by
+   inch size and class, sold by the whole length or cut by the foot. With the sample box ticked, a sanitary shop starts
+   with sample pipes, fittings and fixtures and two contractors.
 5. **Receipt paper width (mm):** 58 or 80, the width of your printer's paper.
 6. **Receipt printer:** pick one now or later in Settings. **No printer yet** is fine.
 7. **Keep the sample products and customers so I can explore first:** tick this to try Salezy with demo products. Leave
@@ -172,7 +174,7 @@ Salezy opens on **New bill**, the counter screen. This is where you spend most o
 6. **Quick items:** buttons for things that have no barcode, like loose sugar or bread.
 7. **The key strip** at the bottom lists the shortcuts for this screen.
 
-Below Cash are **Pay…** (F10) for other ways to pay, **Hold** (F7), **Recall** (F8, with the number of bills on hold),
+Below Cash are **Card / Udhaar / Split** (F10) for card, wallet, credit or part payment, **Hold** (F7), **Recall** (F8, with the number of bills on hold),
 **Discount** (F11) and **Clear** (Ctrl+Shift+N).
 
 ---
@@ -230,8 +232,8 @@ The customer's dues show under their name, and a customer can be set to get whol
 
 ## 10. Take payment
 
-For the most common sale, press **Cash** (F9): the bill is paid in exact cash and saved. For anything else, press
-**Pay…** (F10).
+For the most common sale, press **Cash** (F9): the bill is paid in exact cash and saved. For card, wallet, credit or
+part payment, press **Card / Udhaar / Split** (F10).
 
 ![Taking payment: the way they pay, the amount received and the change](images/payment.png)
 
@@ -242,8 +244,8 @@ For the most common sale, press **Cash** (F9): the bill is paid in exact cash an
 5. Click **Complete sale**, or press **Enter**.
 
 For card and wallet payments you can type a reference, such as the last 4 digits of the card. If the customer pays less
-than the total, tick **Put the remaining balance on customer's credit**: what they paid is taken, and the rest goes on
-their credit.
+than the total, tick **Put the rest of this bill on the customer's credit (udhaar)**: what they paid is taken, and the
+rest goes on their credit. This needs a customer (F6); a walk-in customer must pay the full amount.
 
 After saving, the bill number and total appear under the keys, and **Ctrl+P** reprints that last bill.
 
@@ -253,7 +255,7 @@ Choose the customer first (F6). A walk-in customer cannot buy on credit.
 
 ![The whole bill on credit, with the customer's new total due](images/credit.png)
 
-1. In **Pay…**, choose **Credit (Udhaar)**.
+1. In **Card / Udhaar / Split** (F10), choose **Credit (Udhaar)**.
 2. Salezy shows what the customer will owe after this bill.
 3. Click **Complete sale**.
 
@@ -407,6 +409,13 @@ When you scan or pick a style, Salezy asks which one:
 
 To set up the sizes and colours, see [section 27](#27-add-or-edit-a-product).
 
+**Sanitary and hardware shops** use the same sizes for pipes and fittings. A style such as **UPVC Pipe** has one
+product for each size and class, for example 1" SCH 40 or 4" Class B, and the picker lists the sizes in order: ½", ¾",
+1", 1¼" and so on up to 10". A pipe is priced per length (for example a 20 ft length) and can also be cut: press **F4**
+on the line, choose the feet, and type how many. Seven feet of a 20 ft length takes 0.35 of a length out of stock and
+charges seven times the price per foot. Searching `4 inch`, `4"` or `4in` finds the 4" items, and `1/2` finds ½".
+Contractors are customers on the wholesale price, so their bills use your contractor rate and can go on credit.
+
 ---
 
 # Part 4. After the sale
@@ -442,7 +451,7 @@ The items go back into stock, into the batch they came from.
 
 ## 24. Edit or cancel a bill
 
-- **Edit** (F4) opens the bill at the counter. Change it and save with **Cash** (F9) or **Pay…** (F10). The stock is
+- **Edit** (F4) opens the bill at the counter. Change it and save with **Cash** (F9) or **Card / Udhaar / Split** (F10). The stock is
   corrected.
 - **Cancel** (Ctrl+Del) cancels a bill with a reason. Its items go back into stock, and it stays in the list marked
   **Cancelled**.
@@ -488,6 +497,10 @@ Fill in what you need; only the **Name** and **Sale price** are required. The re
 - In a medical store: the **Generic / salt name**, **Loose units per pack** (for example 10 tablets in a strip), the
   batch and expiry, and **Scheduled / prescription-only drug**.
 - In a clothing shop: type the sizes and colours (comma separated) to create one product for each combination.
+- In a sanitary and hardware shop: the units include **length**, **ft** and **set**. Set **Feet or metres per length**
+  (for example 20) and the **Cut unit** (ft or meter) to sell a pipe whole or cut. Type the sizes and the classes or
+  types (comma separated), for example `½", ¾", 1"` and `SCH 40, SCH 80`, to create one product for each combination.
+  Each size starts at the style's price; open it to set its own price.
 - An **Offer price** with an end date, **Ask for serial / IMEI number on every sale** for phones and electronics, and
   **Active** (an inactive product does not appear when billing).
 - With tax invoices turned on (see [section 39](#39-shop-details-and-billing)): the **HSN / SAC** code (India) or
@@ -520,7 +533,7 @@ Set how many labels per product, the label size in millimetres, and which price 
 
 ## 30. Import and export products
 
-The **CSV** menu on the Products screen exports every product to a spreadsheet file (Ctrl+E) and imports products from
+The **Import / export** menu on the Products screen exports every product to a spreadsheet file (Ctrl+E) and imports products from
 one (Ctrl+I). A file exported from Salezy can be edited and imported again: products with the same barcode or name are
 updated, and new ones are added.
 
@@ -533,7 +546,20 @@ updated, and new ones are added.
 1. Click a customer.
 2. **Receive payment** (F9): see [section 32](#32-receive-a-payment-from-a-customer).
 3. **New bill for customer** opens the counter with this customer already chosen.
-4. The **Ledger** shows every bill and payment, with the date and amounts.
+4. The **Ledger** shows every bill, payment and balance correction, with the date and amounts. **Ctrl+L** moves into
+   it, so you can pick a line with the arrow keys.
+
+If a payment was recorded by mistake, pick it in the ledger and press **Cancel payment** (Ctrl+X), then give a reason.
+The customer owes that amount again, and the payment stays in the ledger, struck through and marked **cancelled**. A
+cancelled cash payment no longer counts in day close, the cash book or the accountant export, so the drawer still
+matches. With no line picked, Ctrl+X offers the newest payment. A payment taken with a bill is cancelled with the bill
+(see [section 24](#24-edit-or-cancel-a-bill)).
+
+If the balance itself is wrong, for example an old notebook total typed in wrongly, an admin can press **Adjust
+balance** (Ctrl+B): either set the balance to a figure, or add or subtract an amount, and give a reason. The correction
+is its own line in the ledger, so the history stays honest. It is never counted as cash.
+
+Only an admin can cancel a payment or adjust a balance.
 
 **New customer** (Ctrl+N) adds a customer, and **Edit** (F4) changes their name, phone, address and whether they get
 wholesale prices. With tax invoices turned on, a customer can also have a **tax number** (GSTIN, NTN or STRN) and a
@@ -546,6 +572,9 @@ wholesale prices. With tax invoices turned on, a customer can also have a **tax 
 1. Type the amount received (Salezy fills in what they owe), add a note if you like, and click **Receive**. The payment
    appears in their ledger and lowers what they owe.
 
+If the amount is more than they owe, Salezy says so first, because the extra would be left with you as an advance
+(their balance shows as **Advance**). Press **Enter** again to record it on purpose, or correct the amount.
+
 ## 33. Purchases: stock from suppliers
 
 **Purchases** (Ctrl+6) lists the invoices from your suppliers, with what you still owe on each.
@@ -555,6 +584,8 @@ wholesale prices. With tax invoices turned on, a customer can also have a **tax 
 1. **New purchase** (Ctrl+N): see [section 34](#34-enter-a-suppliers-invoice).
 2. **Pay supplier** (F9): see [section 35](#35-pay-a-supplier-or-return-goods).
 3. **Return to supplier** (Ctrl+R): see [section 35](#35-pay-a-supplier-or-return-goods).
+4. **Supplier ledger** (Ctrl+L): every invoice, payment and return for the selected invoice's supplier, with the running
+   balance.
 
 Purchases, Reports, Settings and Expenses open only for an admin.
 
@@ -577,6 +608,11 @@ have not paid yet: the whole invoice is then owed, and shows on the Purchases sc
 
 1. Select the supplier's invoice, click **Pay supplier** (F9), check the amount, choose how you paid, and click **OK**.
    The payment settles the oldest unpaid invoice first. A cash payment is taken out of the drawer at day close.
+
+Paying more than you owe asks first, and the extra is recorded as an advance only when you press **Enter** again. A
+payment made by mistake is cancelled in the **Supplier ledger** (Ctrl+L): pick it, press **Cancel payment** (Ctrl+X)
+and give a reason. You owe that amount again, the invoices it paid are open again, and it leaves the drawer count. Only
+an admin can cancel a payment.
 
 **Return to supplier** (Ctrl+R) sends goods back against an invoice: pick the quantities and give a reason. The stock
 leaves the batch it came in, and what you owe goes down.
@@ -880,7 +916,7 @@ take your records with it. The section shows when the last backup was taken, and
 | F6 | Choose the customer |
 | F7 / F8 | Hold the bill / recall a held bill |
 | F9 | Cash: take the exact amount and save |
-| F10 | Pay… (other ways to pay) |
+| F10 | Card / Udhaar / Split: card, wallet, credit or part payment |
 | F11 | Discount on the whole bill |
 | + / − | One more / one less of the selected line |
 | Del | Remove the selected line |
@@ -902,6 +938,8 @@ take your records with it. The section shows when the last backup was taken, and
 
 | Key | Does |
 |---|---|
+| Ctrl+L / Ctrl+X / Ctrl+B | Customers: into the ledger / cancel a payment / adjust the balance |
+| Ctrl+L | Purchases: the supplier's ledger, where a payment can be cancelled |
 | Ctrl+T | Settings: jump to the tax invoice card |
 | Ctrl+Shift+E | Reports: accountant export (Tally XML or CSV) |
 | Ctrl+M / Ctrl+Y | Analytics: sales or profit / calendar or financial year |
